@@ -2,6 +2,7 @@ package fr.pizzeria.console;
 
 public class Pizza
 {
+	//attribut
 	public int id = 0;
 	public String code;
 	public String libelle;
@@ -21,5 +22,13 @@ public class Pizza
 		this(code, libelle, prix);
 		this.id = id;
 	}
+	
+	//methode
+	public static void affichage(Pizza piz)
+	{
+		String sortie = piz.code + " -> " + piz.libelle + " (" + piz.prix + " €)";
+		System.out.println(sortie);
+	}
+
 
 }
