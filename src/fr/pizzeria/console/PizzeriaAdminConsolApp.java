@@ -5,6 +5,15 @@ import java.util.Arrays;
 
 public class PizzeriaAdminConsolApp
 {
+	
+	public static void affichList(Pizza[] liste)
+	{
+		for(int i=0; i<liste.length; i++)
+		{
+			liste[i].toString();	
+		}
+
+	}
 
 	public static void main(String[] args)
 	{
@@ -22,7 +31,7 @@ public class PizzeriaAdminConsolApp
 		listPizz[6] = new Pizza(6, "ORI", "L'orientale", 13.50);
 		listPizz[7] = new Pizza(7, "IND", "L'indienne", 14.00);
 		
-		int choix = 0; // obligation de l'initialiser pur entrer dans le while
+		int choix = 0; // obligation de l'initialiser pour entrer dans le while
 		
 		while(choix!=99)
 		{
@@ -36,17 +45,15 @@ public class PizzeriaAdminConsolApp
 			
 			choix = entreeUtilisateur.nextInt();
 			entreeUtilisateur.nextLine();
+			Pizza pizz = new Pizza();
 		
 			switch(choix)
 			{
 			//cas 1 : liste de pizzas
 				case(1): 
 					System.out.println("Liste des pizzas");
-					//boucle pour afficher la liste des pizzas
-					for(int i=0; i<listPizz.length; i++)
-					{
-						Pizza.affichage(listPizz[i]);	
-					}
+
+					PizzeriaAdminConsolApp.affichList(listPizz);
 					
 					break;
 			
@@ -56,15 +63,13 @@ public class PizzeriaAdminConsolApp
 				
 					//entree de l'utilisateur
 					System.out.println("Veuillez saisir le code");
-					String code = entreeUtilisateur.nextLine();
+					pizz.setCode(entreeUtilisateur.nextLine());
 					System.out.println("Veuillez saisir le nom (sans espace)");
-					String nom = entreeUtilisateur.nextLine();
+					pizz.setLibelle(entreeUtilisateur.nextLine());
 					System.out.println("Veuillez saisir le prix");
-					String p = entreeUtilisateur.nextLine();
-					double prix = Double.parseDouble(p);
+					pizz.setPrix(entreeUtilisateur.nextLine());
 					
-					//initialisation de la nv pizza + ajusteent de la taille du tableau pr l'ajouter
-					Pizza pizz = new Pizza(code,nom,prix);
+					//initialisation de la nv pizza + ajustement taille du tableau pr l'ajouter
 					listPizz = Arrays.copyOf(listPizz, listPizz.length+1);
 					listPizz[listPizz.length-1] = pizz;
 
@@ -73,30 +78,25 @@ public class PizzeriaAdminConsolApp
 			//cas 3 : modif de pizza	
 				case(3):
 					System.out.println("Mise à jour d'une pizza");
-				
-				//boucle pour afficher la liste des pizzas
-					for(int i=0; i<listPizz.length; i++)
-					{
-						Pizza.affichage(listPizz[i]);	
-					}
+
+					PizzeriaAdminConsolApp.affichList(listPizz);
 					
 					//entree de l'utilisateur
 					System.out.println("Veuillez saisir le code de la pizza à modifier");
 					String ancCode = entreeUtilisateur.nextLine();
 					System.out.println("Veuillez saisir le nouveau code");
-					String nvCode = entreeUtilisateur.nextLine();
+					pizz.setCode(entreeUtilisateur.nextLine());
 					System.out.println("Veuillez saisir le nouveau nom (sans espace)");
-					String nvNom = entreeUtilisateur.nextLine();
+					pizz.setLibelle(entreeUtilisateur.nextLine());
 					System.out.println("Veuillez saisir le nouveau prix");
-					String nvP = entreeUtilisateur.nextLine();
-					double nvPrix = Double.parseDouble(nvP);
+					pizz.setPrix(entreeUtilisateur.nextLine());
 					
 					//parcour de la liste des pizzas pour trouver celle à modifier
 					for(int i=0; i<listPizz.length; i++)
 					{
-						if(ancCode.equals(listPizz[i].code))
+						if(ancCode.equals(listPizz[i].getCode() ))
 						{
-							listPizz[i] = new Pizza(nvCode, nvNom, nvPrix);
+							listPizz[i] = pizz;
 						}
 					}
 					
@@ -116,9 +116,7 @@ public class PizzeriaAdminConsolApp
 					listPizz = new Pizza[listPizz.length-1];
 					for(int i=0; i<copie.length; i++)
 					{
-						System.out.println(copie[i].code);
-						System.out.println(suprm);
-						if(!suprm.equals(copie[i].code))
+						if(!suprm.equals(copie[i].getCode() ))
 						{
 							System.out.println(c + " " + i);
 							listPizz[c] = copie[i];
