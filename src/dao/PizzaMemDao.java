@@ -10,10 +10,7 @@ public class PizzaMemDao implements IPizzaDao
 	public Pizza[] listPizz;
 	
 	//constructeur
-	//...?
-	
-
-	public Pizza[] findAllPizzas() //on pourrait le mettre en bloc static...
+	public PizzaMemDao()
 	{
 		this.listPizz = new Pizza[8];
 		listPizz[0] = new Pizza(0, "PEP", "Pépéroni", 12.50);
@@ -24,10 +21,15 @@ public class PizzaMemDao implements IPizzaDao
 		listPizz[5] = new Pizza(5, "SAV", "La savoyarde", 13.00);
 		listPizz[6] = new Pizza(6, "ORI", "L'orientale", 13.50);
 		listPizz[7] = new Pizza(7, "IND", "L'indienne", 14.00);
+	}
+	
+	//getter
+	public Pizza[] findAllPizzas()
+	{
 		return listPizz;
 	}
 
-	
+	//methode
 	public void saveNewPizza(Pizza pizz)
 	{
 		pizz.setId(listPizz.length);
@@ -86,17 +88,6 @@ public class PizzaMemDao implements IPizzaDao
 			}			
 		}	
 		return false;
-	}
-	
-	//setter
-	public void setDao(Pizza[] liste)
-	{
-		this.listPizz = liste;
-	}
-	
-	public Pizza[] getDao()
-	{
-		return this.listPizz;
 	}
 	
 }
