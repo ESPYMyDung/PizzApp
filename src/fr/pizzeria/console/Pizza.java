@@ -43,11 +43,9 @@ public class Pizza
 	public String toString()
 	{
 		String sortie = this.getCode() + " -> " + this.getLibelle() + " (" + this.getPrix() + " €)";	
-		System.out.println(sortie);
+		//System.out.println(sortie);
 		return sortie;
 	}
-	
-	
 	
 	// setter
 	public void setId(int id)
@@ -72,7 +70,7 @@ public class Pizza
 	}
 	
 	//getter
-	public int getId(int id)
+	public int getId()
 	{
 		return id;
 	}

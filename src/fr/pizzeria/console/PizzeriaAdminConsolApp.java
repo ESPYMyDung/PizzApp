@@ -1,7 +1,8 @@
 package fr.pizzeria.console;
+import dao.*;
 
 import java.util.Scanner;
-import java.util.Arrays;
+//import java.util.Arrays;
 
 public class PizzeriaAdminConsolApp
 {
@@ -10,7 +11,7 @@ public class PizzeriaAdminConsolApp
 	{
 		for(int i=0; i<liste.length; i++)
 		{
-			liste[i].toString();	
+			System.out.println(liste[i]);//liste[i].toString();	
 		}
 
 	}
@@ -20,6 +21,7 @@ public class PizzeriaAdminConsolApp
 		Scanner entreeUtilisateur = new Scanner(System.in);
 		System.out.println("***** Pizzeria Administration *****");
 		
+		/*
 		//liste originale de pizza
 		Pizza[] listPizz = new Pizza[8];
 		listPizz[0] = new Pizza(0, "PEP", "Pépéroni", 12.50);
@@ -30,6 +32,11 @@ public class PizzeriaAdminConsolApp
 		listPizz[5] = new Pizza(5, "SAV", "La savoyarde", 13.00);
 		listPizz[6] = new Pizza(6, "ORI", "L'orientale", 13.50);
 		listPizz[7] = new Pizza(7, "IND", "L'indienne", 14.00);
+		*/
+		
+		PizzaMemDao objetDao = new PizzaMemDao();
+		Pizza[] listPizz  = objetDao.findAllPizzas();
+		
 		
 		int choix = 0; // obligation de l'initialiser pour entrer dans le while
 		
@@ -70,8 +77,10 @@ public class PizzeriaAdminConsolApp
 					pizz.setPrix(entreeUtilisateur.nextLine());
 					
 					//initialisation de la nv pizza + ajustement taille du tableau pr l'ajouter
-					listPizz = Arrays.copyOf(listPizz, listPizz.length+1);
-					listPizz[listPizz.length-1] = pizz;
+					/*listPizz = Arrays.copyOf(listPizz, listPizz.length+1);
+					listPizz[listPizz.length-1] = pizz;*/
+					objetDao.saveNewPizza(pizz);
+					listPizz = objetDao.getDao();
 
 					break;
 					
@@ -92,13 +101,15 @@ public class PizzeriaAdminConsolApp
 					pizz.setPrix(entreeUtilisateur.nextLine());
 					
 					//parcour de la liste des pizzas pour trouver celle à modifier
-					for(int i=0; i<listPizz.length; i++)
+					/*for(int i=0; i<listPizz.length; i++)
 					{
 						if(ancCode.equals(listPizz[i].getCode() ))
 						{
 							listPizz[i] = pizz;
 						}
-					}
+					}*/
+					objetDao.updatePizza(ancCode, pizz);
+					listPizz = objetDao.getDao();
 					
 					break;
 			
@@ -111,18 +122,19 @@ public class PizzeriaAdminConsolApp
 					String suprm = entreeUtilisateur.nextLine();
 					
 					//ajustement de la liste pour evitre les trous
-					Pizza[] copie = listPizz.clone();
+					/*Pizza[] copie = listPizz.clone();
 					int c = 0;
 					listPizz = new Pizza[listPizz.length-1];
 					for(int i=0; i<copie.length; i++)
 					{
 						if(!suprm.equals(copie[i].getCode() ))
 						{
-							System.out.println(c + " " + i);
 							listPizz[c] = copie[i];
 							c++;
 						}
-					}
+					}*/
+					objetDao.deletePizza(suprm);
+					listPizz = objetDao.getDao();
 
 					break;
 			}
