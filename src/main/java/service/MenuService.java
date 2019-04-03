@@ -5,6 +5,6 @@ import dao.*;
 
 public abstract class MenuService
 {
-	public abstract void executeUC(Scanner scanner, PizzaMemDao objetDao) throws Exception;
+	public abstract void executeUC(Scanner scanner, IPizzaDao objetDao) throws Exception;
 	
 }

@@ -14,9 +14,13 @@ public class PizzeriaAdminConsolApp
 		Scanner entreeUtilisateur = new Scanner(System.in);
 		System.out.println("***** Pizzeria Administration *****");
 		
-		//liste originale de pizza
-		PizzaMemDao objetDao = new PizzaMemDao();
+
 		
+		//liste originale de pizza
+		//PizzaMemDao objetDao = new PizzaMemDao();
+		IPizzaDao objetDao = new PizzaJBDCdao();
+		
+
 		int choix = 0; // obligation de l'initialiser pour entrer dans le while
 		
 		while(choix!=99)
@@ -95,8 +99,7 @@ public class PizzeriaAdminConsolApp
 		//fin!!!
 		System.out.println("Au revoir :(");
 		entreeUtilisateur.close();
-		
-		
+
 
 	}
 

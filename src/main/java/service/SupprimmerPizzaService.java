@@ -2,12 +2,12 @@ package service;
 
 import java.util.Scanner;
 import fr.pizzeria.exeption.*;
+import dao.IPizzaDao;
 
-import dao.PizzaMemDao;
 
 public class SupprimmerPizzaService extends MenuService
 {
-	public void executeUC(Scanner entreeUtilisateur, PizzaMemDao objetDao)  throws DeletePizzaException
+	public void executeUC(Scanner entreeUtilisateur, IPizzaDao objetDao)  throws DeletePizzaException
 	{
 		System.out.println("Suppression d'une pizza");
 		

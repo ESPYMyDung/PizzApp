@@ -5,7 +5,7 @@ import dao.*;
 
 public class ListerPizzaService extends MenuService
 {
-	public void executeUC(Scanner scanner, PizzaMemDao objetDao)
+	public void executeUC(Scanner scanner, IPizzaDao objetDao)
 	{
 		for(int i=0; i<objetDao.findAllPizzas().length; i++)
 		{

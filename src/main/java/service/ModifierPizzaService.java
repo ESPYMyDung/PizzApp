@@ -2,14 +2,14 @@ package service;
 
 import java.util.Scanner;
 
-import dao.PizzaMemDao;
+import dao.IPizzaDao;
 import fr.pizzeria.console.Pizza;
 import fr.pizzeria.exeption.PizzaExistException;
 import fr.pizzeria.exeption.UpdatePizzaException;
 
 public class ModifierPizzaService extends MenuService
 {
-	public void executeUC(Scanner entreeUtilisateur, PizzaMemDao objetDao) throws UpdatePizzaException
+	public void executeUC(Scanner entreeUtilisateur, IPizzaDao objetDao) throws UpdatePizzaException
 	{
 		Pizza pizz = new Pizza();
 		

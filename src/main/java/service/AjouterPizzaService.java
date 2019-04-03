@@ -8,7 +8,7 @@ import fr.pizzeria.exeption.SavePizzaException;
 
 public class AjouterPizzaService extends MenuService
 {
-	public void executeUC(Scanner entreeUtilisateur, PizzaMemDao objetDao) throws SavePizzaException
+	public void executeUC(Scanner entreeUtilisateur, IPizzaDao objetDao) throws SavePizzaException
 	{
 		System.out.println("Ajout d'une nouvelle pizza");
 		Pizza pizz = new Pizza();
