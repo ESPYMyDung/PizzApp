@@ -17,7 +17,7 @@ public class PizzeriaAdminConsolApp
 
 		
 		//liste originale de pizza
-		//PizzaMemDao objetDao = new PizzaMemDao();
+		//IPizzaDao objetDao = new PizzaMemDao();
 		IPizzaDao objetDao = new PizzaJBDCdao();
 		
 

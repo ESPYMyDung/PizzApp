@@ -3,54 +3,46 @@ package dao;
 import fr.pizzeria.console.Pizza;
 import fr.pizzeria.exeption.PizzaExistException;
 
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ResourceBundle;
+
 
 public class PizzaJBDCdao implements IPizzaDao 
 {
 	//attribut	
 	public Pizza[] listPizz = new Pizza[10];; //public List<Pizza> listPizz = new ArrayList<>();
-		
-	/*private void ouvertureConnect()
+	private String url;
+	private String user;
+	private String pwd;
+	
+	//constructeur 
+	// il initialise aussi les variables privees
+	public PizzaJBDCdao()
 	{
-		try
-		{
-			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost/bdd_pizzeria";
-			Connection connect = DriverManager.getConnection(url,"root", "");
-		}
-		catch (ClassNotFoundException e)
-		{
-			e.getMessage();
-		} 
-		catch (SQLException e) 
-		{
-			e.getMessage();
-		}
-		finally
-		{
-			execution.close();
-			requete.close();
-			connect.close();
-		}
-	}*/
+		super();
+		ResourceBundle bundle = ResourceBundle.getBundle("jdbc");
+		this.url = bundle.getString("url");
+		this.user = bundle.getString("user");
+		this.pwd = bundle.getString("pass");
+	}
+	
 
 	@Override
 	public Pizza[] findAllPizzas()
 	{
-		//ouvertureConnect()
-		try
-		{
-			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost/bdd_pizzeria";
-			Connection connect = DriverManager.getConnection(url,"root", "");
-			
+		//() permet de gere la gestion des fermeture des divers objets
+		try (
+			Connection connect = DriverManager.getConnection(url,user,pwd);
 			Statement requete = connect.createStatement();
 			ResultSet execution = requete.executeQuery("select * from `pizza`");
+			)
+		{
 			int c = 0;
 			
 			//exploitation résultat
@@ -65,13 +57,9 @@ public class PizzaJBDCdao implements IPizzaDao
 			}
 
 		}
-		catch (ClassNotFoundException e)
-		{
-			e.getMessage();
-		} 
 		catch (SQLException e) 
 		{
-			e.getMessage();
+			System.out.println(e.getMessage());
 		}
 				
 		return listPizz;
@@ -81,12 +69,8 @@ public class PizzaJBDCdao implements IPizzaDao
 	public void saveNewPizza(Pizza pizz)
 	{
 		
-		try
+		try (Connection connect = DriverManager.getConnection(url,user,pwd);)
 		{
-			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost/bdd_pizzeria";
-			Connection connect = DriverManager.getConnection(url,"root", "");
-			
 			PreparedStatement nvPizz = connect.prepareStatement
 					("INSERT INTO PIZZA (CODE,NOM,CATEGORIE,PRIX) VALUES (?,?,\"\",?)");
 			nvPizz.setString(1, pizz.getCode());
@@ -94,13 +78,9 @@ public class PizzaJBDCdao implements IPizzaDao
 			nvPizz.setDouble(3, pizz.getPrix());
 			nvPizz.executeUpdate();
 		}
-		catch (ClassNotFoundException e)
-		{
-			e.getMessage();
-		} 
 		catch (SQLException e) 
 		{
-			e.getMessage();
+			System.out.println(e.getMessage());
 		}
 		
 	}
@@ -108,12 +88,8 @@ public class PizzaJBDCdao implements IPizzaDao
 	@Override
 	public void updatePizza(String codePizza, Pizza pizz) throws PizzaExistException
 	{
-		try
+		try (Connection connect = DriverManager.getConnection(url,user,pwd);)
 		{
-			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost/bdd_pizzeria";
-			Connection connect = DriverManager.getConnection(url,"root", "");
-			
 			PreparedStatement chgPizz = connect.prepareStatement
 					("UPDATE PIZZA set CODE=?, NOM=?, PRIX=? WHERE CODE=? ");
 			chgPizz.setString(1, pizz.getCode());
@@ -122,37 +98,25 @@ public class PizzaJBDCdao implements IPizzaDao
 			chgPizz.setString(4, codePizza);
 			chgPizz.executeUpdate();
 		}
-		catch (ClassNotFoundException e)
-		{
-			e.getMessage();
-		} 
 		catch (SQLException e) 
 		{
-			e.getMessage();
+			System.out.println(e.getMessage());
 		}
 	}
 
 	@Override
 	public void deletePizza(String codePizza) throws PizzaExistException
 	{
-		try
+		try (Connection connect = DriverManager.getConnection(url,user,pwd);)
 		{
-			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost/bdd_pizzeria";
-			Connection connect = DriverManager.getConnection(url,"root", "");
-			
 			PreparedStatement suprPizz = connect.prepareStatement
 					("DELETE FROM PIZZA WHERE CODE=?");
 			suprPizz.setString(1, codePizza);
 			suprPizz.executeUpdate();
 		}
-		catch (ClassNotFoundException e)
-		{
-			e.getMessage();
-		} 
 		catch (SQLException e) 
 		{
-			e.getMessage();
+			System.out.println(e.getMessage());
 		}
 		
 	}
@@ -160,12 +124,8 @@ public class PizzaJBDCdao implements IPizzaDao
 	@Override
 	public Pizza findPizzabyCode(String codePizza)
 	{
-		try
+		try (Connection connect = DriverManager.getConnection(url,user,pwd);)
 		{
-		Class.forName("com.mysql.jdbc.Driver");
-		String url = "jdbc:mysql://localhost/bdd_pizzeria";
-		Connection connect = DriverManager.getConnection(url,"root", "");
-		
 		PreparedStatement trvPizz = connect.prepareStatement
 				("select * from `pizza` where CODE=?");
 		trvPizz.setString(1, codePizza);
@@ -181,13 +141,9 @@ public class PizzaJBDCdao implements IPizzaDao
 		return pizz;
 
 		}
-		catch (ClassNotFoundException e)
-		{
-			e.getMessage();
-		} 
 		catch (SQLException e) 
 		{
-			e.getMessage();
+			System.out.println(e.getMessage());
 		}
 		
 		return null;
@@ -196,13 +152,8 @@ public class PizzaJBDCdao implements IPizzaDao
 	@Override
 	public boolean pizzaExists(String codePizza)
 	{
-		try
+		try (Connection connect = DriverManager.getConnection(url,user,pwd);)
 		{
-		Class.forName("com.mysql.jdbc.Driver");
-		String url = "jdbc:mysql://localhost/bdd_pizzeria";
-		Connection connect = DriverManager.getConnection(url,"root", "");
-		
-		//Statement requete = connect.createStatement();
 		PreparedStatement trvPizz = connect.prepareStatement
 				("select * from `pizza` where CODE=?");
 		trvPizz.setString(1, codePizza);
@@ -212,15 +163,29 @@ public class PizzaJBDCdao implements IPizzaDao
 		return execution.next();
 
 		}
-		catch (ClassNotFoundException e)
-		{
-			e.getMessage();
-		} 
 		catch (SQLException e) 
 		{
-			e.getMessage();
+			System.out.println(e.getMessage());
 		}
 		return false;
 	}
+
+	//setter
+	/*private void setProp()
+	{
+		InputStream tmp = getClass().getClassLoader().getResourceAsStream("jbdc.properties");
+		Properties prop = new Properties();
+		try
+		{
+			prop.load(tmp);
+			url = prop.getProperty("url");
+			user = prop.getProperty("user");
+			pwd = prop.getProperty("pass");
+		}
+		catch (IOException e1)
+		{
+			System.out.println(e1.getMessage());
+		}
+	}*/
 
 }
