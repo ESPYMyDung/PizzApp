@@ -1,11 +1,18 @@
 package fr.pizzeria.console;
+//import java.lang.reflect.Field;
+
+import fr.pizzeria.utils.*;
 
 public class Pizza
 {
 	//attribut
 	private int id = 0;
+	@ToString(upperCase = true, after = " -> ")
 	private String code = null;
+	@ToString
 	private String libelle = null;
+	@ToString (before = " (", after = "€)")
+	@Rule
 	private double prix = 0;
 	
 	//constructeur
@@ -42,9 +49,8 @@ public class Pizza
 	//methode
 	public String toString()
 	{
-		String sortie = this.getCode() + " -> " + this.getLibelle() + " (" + this.getPrix() + " €)";	
-		//System.out.println(sortie);
-		return sortie;
+		StringUtils tmp = new StringUtils();
+		return tmp.genStringPizza(this);
 	}
 	
 	// setter

@@ -1,6 +1,7 @@
 package fr.pizzeria.console;
 import dao.*;
 import service.*;
+import fr.pizzeria.exeption.*;
 
 import java.util.Scanner;
 //import java.util.Arrays;
@@ -43,7 +44,14 @@ public class PizzeriaAdminConsolApp
 			//cas 2 : ajout de pizza
 				case(2):
 					AjouterPizzaService ajout = new AjouterPizzaService();
+				try
+				{
 					ajout.executeUC(entreeUtilisateur, objetDao);
+				}
+				catch (SavePizzaException e)
+				{
+					System.out.println(e.getMessage());
+				}
 
 					break;
 					
@@ -55,14 +63,30 @@ public class PizzeriaAdminConsolApp
 					lis.executeUC(entreeUtilisateur, objetDao);
 				
 					ModifierPizzaService modif = new ModifierPizzaService();
-					modif.executeUC(entreeUtilisateur, objetDao);
+					
+					try
+					{
+						modif.executeUC(entreeUtilisateur, objetDao);
+					}
+					catch (UpdatePizzaException e)
+					{
+						System.out.println(e.getMessage());
+					}
 					
 					break;
 			
 			//cas 4 : suppression de pizza
 				case(4):
 					SupprimmerPizzaService supress = new SupprimmerPizzaService();
-					supress.executeUC(entreeUtilisateur, objetDao);
+					
+					try
+					{
+						supress.executeUC(entreeUtilisateur, objetDao);
+					}
+					catch (DeletePizzaException e)
+					{
+						System.out.println(e.getMessage());
+					}
 
 					break;
 			}
