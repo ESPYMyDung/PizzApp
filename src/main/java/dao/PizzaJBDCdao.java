@@ -120,7 +120,7 @@ public class PizzaJBDCdao implements IPizzaDao
 		}
 		
 	}
-
+/*
 	@Override
 	public Pizza findPizzabyCode(String codePizza)
 	{
@@ -168,7 +168,7 @@ public class PizzaJBDCdao implements IPizzaDao
 			System.out.println(e.getMessage());
 		}
 		return false;
-	}
+	}*/
 
 	//setter
 	/*private void setProp()

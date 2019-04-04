@@ -9,6 +9,6 @@ public interface IPizzaDao
 	void saveNewPizza(Pizza pizz);
 	void updatePizza(String codePizza, Pizza pizz) throws PizzaExistException;
 	void deletePizza(String codePizza)throws PizzaExistException;
-	Pizza findPizzabyCode(String codePizza);
-	boolean pizzaExists(String codePizza);
+	//Pizza findPizzabyCode(String codePizza);
+	//boolean pizzaExists(String codePizza);
 }

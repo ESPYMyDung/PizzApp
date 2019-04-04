@@ -1,16 +1,31 @@
 package fr.pizzeria.console;
 //import java.lang.reflect.Field;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import fr.pizzeria.utils.*;
 
+@Entity
+@Table
 public class Pizza
 {
 	//attribut
+	
 	private int id = 0;
+	
+	@Id
+	@Column(name="CODE")
 	@ToString(upperCase = true, after = " -> ")
 	private String code = null;
+	
+	@Column(name="NOM")
 	@ToString
 	private String libelle = null;
+	
+	@Column(name="PRIX")
 	@ToString (before = " (", after = "€)")
 	@Rule
 	private double prix = 0;
