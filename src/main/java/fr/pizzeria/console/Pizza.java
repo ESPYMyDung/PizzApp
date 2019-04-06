@@ -1,5 +1,4 @@
 package fr.pizzeria.console;
-//import java.lang.reflect.Field;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,8 +11,7 @@ import fr.pizzeria.utils.*;
 @Table
 public class Pizza
 {
-	//attribut
-	
+	//attribut	
 	private int id = 0;
 	
 	@Id
@@ -84,10 +82,10 @@ public class Pizza
 		this.libelle = libelle;
 	}
 	
-	public void setPrix(String p) //en théorie pas bien...
+	public void setPrix(double p) //en théorie pas bien...
 	{
-		double prix = Double.parseDouble(p);
-		this.prix = prix;
+		//double prix = Double.parseDouble(p);
+		this.prix = p;
 	}
 	
 	//getter

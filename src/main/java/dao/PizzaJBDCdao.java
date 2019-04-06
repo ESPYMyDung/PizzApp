@@ -10,13 +10,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 
 public class PizzaJBDCdao implements IPizzaDao 
 {
 	//attribut	
-	public Pizza[] listPizz = new Pizza[10];; //public List<Pizza> listPizz = new ArrayList<>();
+	public List<Pizza> listPizz = new ArrayList<>(); //public Pizza[] listPizz = new Pizza[10];
 	private String url;
 	private String user;
 	private String pwd;
@@ -34,7 +36,7 @@ public class PizzaJBDCdao implements IPizzaDao
 	
 
 	@Override
-	public Pizza[] findAllPizzas()
+	public List<Pizza> findAllPizzas()
 	{
 		//() permet de gere la gestion des fermeture des divers objets
 		try (
@@ -43,7 +45,7 @@ public class PizzaJBDCdao implements IPizzaDao
 			ResultSet execution = requete.executeQuery("select * from `pizza`");
 			)
 		{
-			int c = 0;
+			//int c = 0;
 			
 			//exploitation résultat
 			while(execution.next())
@@ -53,7 +55,8 @@ public class PizzaJBDCdao implements IPizzaDao
 				double prix = execution.getDouble("PRIX");
 
 				Pizza pizz = new Pizza(code, nom, prix);
-				listPizz[c] = pizz; c++;
+				//listPizz[c] = pizz; c++;
+				listPizz.add(pizz);
 			}
 
 		}

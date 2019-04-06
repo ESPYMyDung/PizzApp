@@ -19,7 +19,7 @@ public class AjouterPizzaService extends MenuService
 		System.out.println("Veuillez saisir le nom (sans espace)");
 		pizz.setLibelle(entreeUtilisateur.nextLine());
 		System.out.println("Veuillez saisir le prix");
-		pizz.setPrix(entreeUtilisateur.nextLine());
+		pizz.setPrix(Double.parseDouble(entreeUtilisateur.nextLine()));
 		
 		if (pizz.getPrix()<0)
 		{

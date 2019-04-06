@@ -20,7 +20,7 @@ public class PizzaJPAdao implements IPizzaDao
 
 
 	@Override
-	public Pizza[] findAllPizzas()
+	public List<Pizza> findAllPizzas()
 	{
     	TypedQuery<Pizza> requete = travail.createQuery(
     			"select p from Pizza p ", Pizza.class);
@@ -28,7 +28,7 @@ public class PizzaJPAdao implements IPizzaDao
     	List<Pizza> listePizz = requete.getResultList();
 		
 
-		return (Pizza[]) listePizz.toArray();
+		return listePizz;
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class PizzaJPAdao implements IPizzaDao
 		//null?
 		p.setCode(pizz.getCode());
 		p.setLibelle(pizz.getLibelle());
-		//p.setPrix(pizz.getPrix());
+		p.setPrix(pizz.getPrix());
 		
 	}
 

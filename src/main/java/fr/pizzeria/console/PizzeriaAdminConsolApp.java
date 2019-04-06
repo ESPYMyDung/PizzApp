@@ -17,8 +17,8 @@ public class PizzeriaAdminConsolApp
 
 		
 		//liste originale de pizza
-		//IPizzaDao objetDao = new PizzaMemDao();
-		IPizzaDao objetDao = new PizzaJBDCdao();
+		IPizzaDao objetDao = new PizzaMemDao();
+		//IPizzaDao objetDao = new PizzaJBDCdao();
 		
 
 		int choix = 0; // obligation de l'initialiser pour entrer dans le while
