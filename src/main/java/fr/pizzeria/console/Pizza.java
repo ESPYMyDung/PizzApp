@@ -23,10 +23,14 @@ public class Pizza
 	@ToString
 	private String libelle = null;
 	
+	@ToString(before = ", ", after = ",")
+	private CategoriePizza cat;
+	
 	@Column(name="PRIX")
 	@ToString (before = " (", after = "€)")
 	@Rule
 	private double prix = 0;
+	
 	
 	//constructeur
 	/**
@@ -39,11 +43,12 @@ public class Pizza
 	 * @param libelle
 	 * @param prix
 	 */
-	public Pizza(String code, String libelle, double prix)
+	public Pizza(String code, String libelle, CategoriePizza cat, double prix)
 	{
 		this.setId(id++);
 		this.code = code;
 		this.libelle = libelle;
+		this.setCat(cat);
 		this.prix = prix;
 	}
 	
@@ -53,9 +58,9 @@ public class Pizza
 	 * @param libelle
 	 * @param prix
 	 */
-	public Pizza(int id, String code, String libelle, double prix)
+	public Pizza(int id, String code, String libelle, CategoriePizza cat, double prix)
 	{
-		this(code, libelle, prix);
+		this(code, libelle, cat, prix);
 		this.id = id;
 	}
 	
@@ -82,6 +87,10 @@ public class Pizza
 		this.libelle = libelle;
 	}
 	
+	public void setCat(CategoriePizza cat) {
+		this.cat = cat;
+	}
+	
 	public void setPrix(double p) //en théorie pas bien...
 	{
 		//double prix = Double.parseDouble(p);
@@ -102,6 +111,10 @@ public class Pizza
 	public String getLibelle()
 	{
 		return libelle;
+	}
+	
+	public CategoriePizza getCat() {
+		return cat;
 	}
 	
 	public double getPrix()

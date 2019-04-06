@@ -3,6 +3,7 @@ package service;
 import java.util.Scanner;
 
 import dao.*;
+import fr.pizzeria.console.CategoriePizza;
 import fr.pizzeria.console.Pizza;
 import fr.pizzeria.exeption.SavePizzaException;
 
@@ -18,6 +19,8 @@ public class AjouterPizzaService extends MenuService
 		pizz.setCode(entreeUtilisateur.nextLine());
 		System.out.println("Veuillez saisir le nom (sans espace)");
 		pizz.setLibelle(entreeUtilisateur.nextLine());
+		System.out.println("Veuillez saisir la categorie : VIANDE, POISSON ou SANS_VIANDE");
+		pizz.setCat(CategoriePizza.valueOf(entreeUtilisateur.nextLine()));
 		System.out.println("Veuillez saisir le prix");
 		pizz.setPrix(Double.parseDouble(entreeUtilisateur.nextLine()));
 		

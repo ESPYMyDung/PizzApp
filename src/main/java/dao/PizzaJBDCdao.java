@@ -1,5 +1,6 @@
 package dao;
 
+import fr.pizzeria.console.CategoriePizza;
 import fr.pizzeria.console.Pizza;
 import fr.pizzeria.exeption.PizzaExistException;
 
@@ -46,15 +47,17 @@ public class PizzaJBDCdao implements IPizzaDao
 			)
 		{
 			//int c = 0;
+			listPizz.clear();
 			
 			//exploitation résultat
 			while(execution.next())
 			{
 				String code = execution.getString("CODE");
 				String nom = execution.getString("NOM");
+				String cat = execution.getString("CATEGORIE");
 				double prix = execution.getDouble("PRIX");
 
-				Pizza pizz = new Pizza(code, nom, prix);
+				Pizza pizz = new Pizza(code, nom, CategoriePizza.valueOf(cat), prix);
 				//listPizz[c] = pizz; c++;
 				listPizz.add(pizz);
 			}
@@ -75,10 +78,11 @@ public class PizzaJBDCdao implements IPizzaDao
 		try (Connection connect = DriverManager.getConnection(url,user,pwd);)
 		{
 			PreparedStatement nvPizz = connect.prepareStatement
-					("INSERT INTO PIZZA (CODE,NOM,CATEGORIE,PRIX) VALUES (?,?,\"\",?)");
+					("INSERT INTO PIZZA (CODE,NOM,CATEGORIE,PRIX) VALUES (?,?,?,?)");
 			nvPizz.setString(1, pizz.getCode());
 			nvPizz.setString(2, pizz.getLibelle());
-			nvPizz.setDouble(3, pizz.getPrix());
+			nvPizz.setString(3,pizz.getCat().toString());
+			nvPizz.setDouble(4, pizz.getPrix());
 			nvPizz.executeUpdate();
 		}
 		catch (SQLException e) 
@@ -94,11 +98,12 @@ public class PizzaJBDCdao implements IPizzaDao
 		try (Connection connect = DriverManager.getConnection(url,user,pwd);)
 		{
 			PreparedStatement chgPizz = connect.prepareStatement
-					("UPDATE PIZZA set CODE=?, NOM=?, PRIX=? WHERE CODE=? ");
+					("UPDATE PIZZA set CODE=?, NOM=?, CATEGORIE=?, PRIX=? WHERE CODE=? ");
 			chgPizz.setString(1, pizz.getCode());
 			chgPizz.setString(2, pizz.getLibelle());
-			chgPizz.setDouble(3, pizz.getPrix());
-			chgPizz.setString(4, codePizza);
+			chgPizz.setString(3,pizz.getCat().toString());
+			chgPizz.setDouble(4, pizz.getPrix());
+			chgPizz.setString(5, codePizza);
 			chgPizz.executeUpdate();
 		}
 		catch (SQLException e) 

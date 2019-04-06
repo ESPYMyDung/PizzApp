@@ -22,14 +22,14 @@ public class PizzaMemDao implements IPizzaDao {
 		listPizz[6] = new Pizza(6, "ORI", "L'orientale", 13.50);
 		listPizz[7] = new Pizza(7, "IND", "L'indienne", 14.00);
 		*/
-		listPizz.add(new Pizza(0, "PEP", "Pépéroni", 12.50));
-		listPizz.add(new Pizza(1, "MAR", "Margherita", 14.00));
-		listPizz.add(new Pizza(2, "REIN", "La Reine", 11.50));
-		listPizz.add(new Pizza(3, "FRO", "La 4 fromages", 12.00));
-		listPizz.add(new Pizza(4, "CAN", "La cannibale", 12.50));
-		listPizz.add(new Pizza(5, "SAV", "La savoyarde", 13.00));
-		listPizz.add(new Pizza(6, "ORI", "L'orientale", 13.50));
-		listPizz.add(new Pizza(7, "IND", "L'indienne", 14.00));
+		listPizz.add(new Pizza(0, "PEP", "Pépéronie", CategoriePizza.VIANDE, 12.50));
+		listPizz.add(new Pizza(1, "MAR", "Margherita",CategoriePizza.SANS_VIANDE, 14.00));
+		listPizz.add(new Pizza(2, "REIN", "La Reine",CategoriePizza.VIANDE, 11.50));
+		listPizz.add(new Pizza(3, "FRO", "La 4 fromages",CategoriePizza.VIANDE, 12.00));
+		listPizz.add(new Pizza(4, "CAN", "La cannibale",CategoriePizza.VIANDE, 12.50));
+		listPizz.add(new Pizza(5, "SAV", "La savoyarde",CategoriePizza.VIANDE, 13.00));
+		listPizz.add(new Pizza(6, "ORI", "L'orientale",CategoriePizza.VIANDE, 13.50));
+		listPizz.add(new Pizza(7, "IND", "L'indienne",CategoriePizza.VIANDE, 14.00));
 	}
 
 	// getter
@@ -50,10 +50,10 @@ public class PizzaMemDao implements IPizzaDao {
 		if (this.pizzaExists(codePizza))
 		{
 			Pizza tmp = findPizzabyCode(codePizza);
-			int c = tmp.getId();
-			//int i = listPizz.indexOf(tmp);
+			//int c = tmp.getId();
+			int i = listPizz.indexOf(tmp);
 			//listPizz[c] = pizz;
-			listPizz.set(c, pizz);
+			listPizz.set(i, pizz);
 		}
 		else
 		{
