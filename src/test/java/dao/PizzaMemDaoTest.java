@@ -25,8 +25,6 @@ public class PizzaMemDaoTest
 		int t = test.findAllPizzas().size();
 		test.saveNewPizza(new Pizza("VEG", "vegetarienne", CategoriePizza.SANS_VIANDE, 14));
 		Assert.assertEquals(t+1, test.findAllPizzas().size());
-		
-		System.out.println(t + " " + test.findAllPizzas().size());
 	}
 	
 	
