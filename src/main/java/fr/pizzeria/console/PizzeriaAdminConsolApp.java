@@ -67,7 +67,7 @@ public class PizzeriaAdminConsolApp
 				catch (SavePizzaException e)
 				{
 					System.out.println(e.getMessage());
-					LOG.error("une erreur est survenu", e);
+					LOG.error("une erreur est survenue", e);
 				}
 	
 				break;
@@ -88,7 +88,7 @@ public class PizzeriaAdminConsolApp
 				catch (UpdatePizzaException e)
 				{
 					System.out.println(e.getMessage());
-					LOG.error("une erreur est survenu", e);
+					LOG.error("une erreur est survenue", e);
 				}
 	
 				break;
