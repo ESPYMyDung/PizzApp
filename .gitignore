@@ -4,3 +4,5 @@ target/
 .metadata/
 .classpath
 .project
+app.log
+exception.log

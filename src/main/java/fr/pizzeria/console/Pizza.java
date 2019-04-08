@@ -5,7 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-import fr.pizzeria.utils.*;
+import fr.pizzeria.utils.Rule;
+import fr.pizzeria.utils.StringUtils;
+import fr.pizzeria.utils.ToString;
 
 @Entity
 @Table
