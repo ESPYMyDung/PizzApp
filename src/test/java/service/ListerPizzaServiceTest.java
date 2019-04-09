@@ -1,16 +1,15 @@
 package service;
 
-//import static org.junit.Assert.*;
+import static org.junit.contrib.java.lang.system.TextFromStandardInputStream.emptyStandardInputStream;
 
 import java.util.Scanner;
 
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.contrib.java.lang.system.TextFromStandardInputStream;
-import static org.junit.contrib.java.lang.system.TextFromStandardInputStream.*;
+import org.mockito.Mockito;
 
 import dao.IPizzaDao;
-import dao.PizzaMemDao;
 
 public class ListerPizzaServiceTest
 {
@@ -20,12 +19,14 @@ public class ListerPizzaServiceTest
 	@Test
 	public void testExecuteUC()
 	{
-		entree.provideLines("1");
 		
-		
-		IPizzaDao objetDao = new PizzaMemDao();
+		IPizzaDao testDao = Mockito.mock(IPizzaDao.class);
+		entree.provideLines("1"); // utilité de cette ligne ???
+
 		ListerPizzaService lister = new ListerPizzaService();
-		lister.executeUC(new Scanner(System.in), objetDao);
+		lister.executeUC(new Scanner(System.in), testDao);
+		
+		Mockito.verify(testDao).findAllPizzas();
 	}
 
 }
