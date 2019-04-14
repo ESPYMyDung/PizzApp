@@ -14,8 +14,7 @@ import fr.pizzeria.exeption.UpdatePizzaException;
 import service.AjouterPizzaService;
 import service.ListerPizzaService;
 import service.ModifierPizzaService;
-import service.SupprimmerPizzaService;
-//import java.util.Arrays;
+import service.SupprimerPizzaService;
 
 public class PizzeriaAdminConsolApp
 {
@@ -98,7 +97,7 @@ public class PizzeriaAdminConsolApp
 
 			//cas 4 : suppression de pizza
 			case(4):
-				SupprimmerPizzaService supress = new SupprimmerPizzaService();
+				SupprimerPizzaService supress = new SupprimerPizzaService();
 
 				try
 				{

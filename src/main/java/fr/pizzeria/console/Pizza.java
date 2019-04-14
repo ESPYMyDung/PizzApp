@@ -80,6 +80,37 @@ public class Pizza
 		return tmp.genStringPizza(this);
 	}
 	
+
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pizza other = (Pizza) obj;
+		if (cat != other.cat)
+			return false;
+		if (code == null) {
+			if (other.code != null)
+				return false;
+		}
+		else if (!code.equals(other.code))
+			return false;
+		if (libelle == null)
+		{
+			if (other.libelle != null)
+				return false;
+		}
+		else if (!libelle.equals(other.libelle))
+			return false;
+		if (Double.doubleToLongBits(prix) != Double.doubleToLongBits(other.prix))
+			return false;
+		return true;
+	}
+
 	// setter
 	public void setId(int id)
 	{

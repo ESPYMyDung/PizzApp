@@ -5,7 +5,7 @@ import fr.pizzeria.exeption.*;
 import dao.IPizzaDao;
 
 
-public class SupprimmerPizzaService extends MenuService
+public class SupprimerPizzaService extends MenuService
 {
 	public void executeUC(Scanner entreeUtilisateur, IPizzaDao objetDao)  throws DeletePizzaException
 	{

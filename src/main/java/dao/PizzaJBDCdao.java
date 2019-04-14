@@ -1,10 +1,5 @@
 package dao;
 
-import fr.pizzeria.console.CategoriePizza;
-import fr.pizzeria.console.Pizza;
-import fr.pizzeria.exeption.PizzaExistException;
-
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -15,18 +10,21 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import fr.pizzeria.console.CategoriePizza;
+import fr.pizzeria.console.Pizza;
+import fr.pizzeria.exeption.PizzaExistException;
+
 
 public class PizzaJBDCdao implements IPizzaDao 
 {
 	//attribut	
-	public List<Pizza> listPizz = new ArrayList<>(); //public Pizza[] listPizz = new Pizza[10];
+	public List<Pizza> listPizz = new ArrayList<>();
 	private String url;
 	private String user;
 	private String pwd;
 	
 	//constructeur 
-	// il initialise aussi les variables privees
-	public PizzaJBDCdao()
+	public PizzaJBDCdao()  // il initialise aussi les variables privees
 	{
 		super();
 		ResourceBundle bundle = ResourceBundle.getBundle("jdbc");
@@ -58,7 +56,6 @@ public class PizzaJBDCdao implements IPizzaDao
 				double prix = execution.getDouble("PRIX");
 
 				Pizza pizz = new Pizza(code, nom, CategoriePizza.valueOf(cat), prix);
-				//listPizz[c] = pizz; c++;
 				listPizz.add(pizz);
 			}
 
@@ -128,72 +125,5 @@ public class PizzaJBDCdao implements IPizzaDao
 		}
 		
 	}
-/*
-	@Override
-	public Pizza findPizzabyCode(String codePizza)
-	{
-		try (Connection connect = DriverManager.getConnection(url,user,pwd);)
-		{
-		PreparedStatement trvPizz = connect.prepareStatement
-				("select * from `pizza` where CODE=?");
-		trvPizz.setString(1, codePizza);
-		
-		ResultSet execution = trvPizz.executeQuery();
-		
-		//exploitation résultat
-		String code = execution.getString("CODE");
-		String nom = execution.getString("NOM");
-		double prix = execution.getDouble("PRIX");
-		
-		Pizza pizz = new Pizza(code, nom, prix);
-		return pizz;
-
-		}
-		catch (SQLException e) 
-		{
-			System.out.println(e.getMessage());
-		}
-		
-		return null;
-	}
-
-	@Override
-	public boolean pizzaExists(String codePizza)
-	{
-		try (Connection connect = DriverManager.getConnection(url,user,pwd);)
-		{
-		PreparedStatement trvPizz = connect.prepareStatement
-				("select * from `pizza` where CODE=?");
-		trvPizz.setString(1, codePizza);
-		
-		ResultSet execution = trvPizz.executeQuery();
-
-		return execution.next();
-
-		}
-		catch (SQLException e) 
-		{
-			System.out.println(e.getMessage());
-		}
-		return false;
-	}*/
-
-	//setter
-	/*private void setProp()
-	{
-		InputStream tmp = getClass().getClassLoader().getResourceAsStream("jbdc.properties");
-		Properties prop = new Properties();
-		try
-		{
-			prop.load(tmp);
-			url = prop.getProperty("url");
-			user = prop.getProperty("user");
-			pwd = prop.getProperty("pass");
-		}
-		catch (IOException e1)
-		{
-			System.out.println(e1.getMessage());
-		}
-	}*/
 
 }

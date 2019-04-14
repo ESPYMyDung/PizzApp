@@ -9,6 +9,13 @@ import fr.pizzeria.exeption.PizzaExistException;
 
 public class PizzaMemDaoTest
 {
+	/* mettre pizzaMemDao en private 
+	 * pour utilisation par tout le code sans tout le temps le reinitialiser
+	 *  +  utilisation du @Before
+	 * 
+	 * 
+	 * 
+	 */
 
 	@Test
 	public void testFindAllPizza()
