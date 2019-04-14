@@ -2,6 +2,10 @@ package fr.pizzeria.console;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -13,10 +17,11 @@ import fr.pizzeria.utils.ToString;
 @Table
 public class Pizza
 {
-	//attribut	
+	//attribut
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id = 0;
 	
-	@Id
 	@Column(name="CODE")
 	@ToString(upperCase = true, after = " -> ")
 	private String code = null;
@@ -25,7 +30,9 @@ public class Pizza
 	@ToString
 	private String libelle = null;
 	
+	@Column(name="CATEGORIE")
 	@ToString(before = ", ", after = ",")
+	@Enumerated(EnumType.STRING)
 	private CategoriePizza cat;
 	
 	@Column(name="PRIX")

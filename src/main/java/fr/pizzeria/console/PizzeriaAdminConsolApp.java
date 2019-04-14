@@ -6,7 +6,8 @@ import org.slf4j.LoggerFactory;
 
 import dao.IPizzaDao;
 //import dao.PizzaJBDCdao;
-import dao.PizzaMemDao;
+import dao.PizzaJPAdao;
+//import dao.PizzaMemDao;
 import fr.pizzeria.exeption.DeletePizzaException;
 import fr.pizzeria.exeption.SavePizzaException;
 import fr.pizzeria.exeption.UpdatePizzaException;
@@ -29,8 +30,9 @@ public class PizzeriaAdminConsolApp
 
 
 		//liste originale de pizza
-		IPizzaDao objetDao = new PizzaMemDao();
+		//IPizzaDao objetDao = new PizzaMemDao();
 		//IPizzaDao objetDao = new PizzaJBDCdao();
+		IPizzaDao objetDao = new PizzaJPAdao();
 
 
 		int choix = 0; // obligation de l'initialiser pour entrer dans le while
@@ -116,6 +118,9 @@ public class PizzeriaAdminConsolApp
 		//fin!!!
 		System.out.println("Au revoir :(");
 		entreeUtilisateur.close();
+		
+		//si on est en JPA
+		((PizzaJPAdao) objetDao).fermeture();
 
 
 	}
